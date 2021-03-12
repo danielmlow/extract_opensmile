@@ -2,6 +2,9 @@
 
 
 Clone this repository:
+
+Important: OpenSmile does not allow spaces in the input path so place this directory and data near the root of your computer, e.g., /Users/yourname/here
+
 ```
 git clone https://github.com/danielmlow/extract_opensmile.git
 ```
@@ -13,6 +16,8 @@ cd ./path/to/extract_opensmile/
 
 
 # Conda
+
+
 
 ```
 conda create --name opensmile --file requirements.txt

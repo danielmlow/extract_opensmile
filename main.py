@@ -41,7 +41,7 @@ if __name__ == "__main__":
 	
 	audio_filenames = [str(n) for n in audio_filenames]
 	audio_filenames = [filepath for filepath in audio_filenames if not any(word in filepath for word in ['.DS_Store'])]
-	print(audio_filenames)
+
 
 
 	
@@ -66,14 +66,7 @@ if __name__ == "__main__":
 			       sampling_rate=sampling_rate, bit_rate=bit_rate)
 
 
-		paths_to_audio = list(Path(wav_dir).rglob("*.[wW][aA][vV]"))
-	else:
-		paths_to_audio = list(Path(input_dir).rglob("*"))
-		paths_to_audio = [str(n) for n in paths_to_audio]
-		paths_to_audio = [n for n in paths_to_audio if n not in ['.DS_Store']]
-
-
-	
+		audio_filenames = list(Path(wav_dir).rglob("*.[wW][aA][vV]"))
 
 	# Make sure all wavs have been converted
 	# https://stackoverflow.com/questions/16196712/python-to-wait-for-shell-command-to-complete
@@ -85,10 +78,11 @@ if __name__ == "__main__":
 	smile = opensmile.Smile(
 		feature_set=opensmile.FeatureSet.eGeMAPSv02, #or path to conf: 'gemaps/eGeMAPSv02.conf'
 		feature_level=feature_level,
+		verbose=True,
 	)
 
 	
-	vectors = smile.process_files(paths_to_audio)
+	vectors = smile.process_files(audio_filenames)
 
 
 	output_path = output_dir+ f"{input_dir.split('/')[-2]}_eGeMAPSv02_{feature_level}_{str(datetime.datetime.now()).replace(' ', '-').replace(':', '-').replace('.', '-')}.csv"
